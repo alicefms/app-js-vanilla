@@ -12,7 +12,7 @@ const addTransactionInArray = (transactionName, transactionAmount) =>{
     dummyTransactions.push({
         id:12, //id fixa. alterar depois
         name: transactionName,
-        amount: transactionAmount
+        amount: Number (transactionAmount)
     })
 }
 const handleFormSubmit = event => {
@@ -34,8 +34,18 @@ const addTransactionIntoDOM = transaction => {
     transactionUl.append(li); // append add no final da lista
 }
 
+const updateBalanceValues = () => {
+    //o map faz um array pegando uma propriedade(amount) de cada objeto 
+    const transactionsAmount = dummyTransactions.map(({amount})=> amount);
+    console.log(transactionsAmount);
+    const total = transactionsAmount.reduce((acc, transaction) =>
+    acc + transaction, 0);
+    console.log(total);
+}
+
 const init = () => {
     transactionUl.innerHTML= ''; //gambiarra para não relistar os itens já printados
     dummyTransactions.forEach(addTransactionIntoDOM);
+    updateBalanceValues();
 }
 init ();
