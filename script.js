@@ -35,6 +35,7 @@ const addTransactionIntoDOM = transaction => {
 }
 
 const init = () => {
+    transactionUl.innerHTML= ''; //gambiarra para não relistar os itens já printados
     dummyTransactions.forEach(addTransactionIntoDOM);
 }
 init ();
