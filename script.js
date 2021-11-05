@@ -40,7 +40,15 @@ const updateBalanceValues = () => {
     console.log(transactionsAmount);
     const total = transactionsAmount.reduce((acc, transaction) =>
     acc + transaction, 0);
-    console.log(total);
+    console.log('total: ' + total);
+
+    const income = transactionsAmount.filter(value => value>0)
+                    .reduce((acc, value)=> acc+value, 0);
+    console.log('receitas: ' + income);
+
+    const expense = transactionsAmount.filter(value => value<0)
+                    .reduce((acc, value)=> acc+value, 0);
+    console.log('despesas: '+ expense);
 }
 
 const init = () => {
