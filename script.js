@@ -17,11 +17,13 @@ const addTransactionInArray = (transactionName, transactionAmount) =>{
 }
 const handleFormSubmit = event => {
     event.preventDefault(); // evita que a página seja recarregada qdo dá o submit.
-    if(inputTransactionName.value.trim() === '' || inputTransactionAmount.value.trim() === '' ){
+    if(inputTransactionName.value.trim() === '' || 
+    inputTransactionAmount.value.trim() === '' ){
         alert('Informe a descrição e o valore da transação');
         return;
     }
-    addTransactionInArray(inputTransactionName, inputTransactionAmount);
+    addTransactionInArray(inputTransactionName.value, inputTransactionAmount.value);
+    init();
 }
 
 form.addEventListener('submit', handleFormSubmit);
