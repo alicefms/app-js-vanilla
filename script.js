@@ -8,9 +8,11 @@ let dummyTransactions = [
     {id: 3, name: 'Salário', amount: 500},
     {id: 4, name: 'Violão', amount: 120}
 ]
+
+
 const addTransactionInArray = (transactionName, transactionAmount) =>{
     dummyTransactions.push({
-        id:12, //id fixa. alterar depois
+        id:dummyTransactions[dummyTransactions.length-1].id +1, 
         name: transactionName,
         amount: Number (transactionAmount)
     })
@@ -30,7 +32,9 @@ form.addEventListener('submit', handleFormSubmit);
 
 const addTransactionIntoDOM = transaction => {
     const li = document.createElement('li');
-    li.innerHTML=`${transaction.name} ${transaction.amount}`;
+    li.innerHTML=`
+    ${transaction.id} ${transaction.name} 
+    <span> ${transaction.amount}</span> <button onClick="removeTransaction(${transaction.id})">x</button>`;
     transactionUl.append(li); // append add no final da lista
 }
 
@@ -50,10 +54,19 @@ const updateBalanceValues = () => {
                     .reduce((acc, value)=> acc+value, 0);
     console.log('despesas: '+ expense);
 
-    document.getElementById('balance').innerHTML = `R$ ${total},00`;
-    document.getElementById('money-plus').innerHTML = `R$ ${income},00`;
-    document.getElementById('money-minus').innerHTML = `R$ ${expense},00`;
+    //insere os valoes no html
+    document.getElementById('balance').textContent = `${total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    document.getElementById('money-plus').textContent = `${income.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    document.getElementById('money-minus').textContent = `${expense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    //se usar querySelector, tem q botar # pra id, e . pra classe
 }
+
+const removeTransaction = codigo => {
+    dummyTransactions= dummyTransactions.filter(transaction => transaction.id!==codigo);
+    console.log(dummyTransactions);
+    init();
+}
+
 
 const init = () => {
     transactionUl.innerHTML= ''; //gambiarra para não relistar os itens já printados
