@@ -49,6 +49,10 @@ const updateBalanceValues = () => {
     const expense = transactionsAmount.filter(value => value<0)
                     .reduce((acc, value)=> acc+value, 0);
     console.log('despesas: '+ expense);
+
+    document.getElementById('balance').innerHTML = `R$ ${total},00`;
+    document.getElementById('money-plus').innerHTML = `R$ ${income},00`;
+    document.getElementById('money-minus').innerHTML = `R$ ${expense},00`;
 }
 
 const init = () => {
